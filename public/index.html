@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>if(localStorage.getItem("shp_theme")==="dark")document.documentElement.setAttribute("data-theme","dark");</script>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%8C%B1%3C/text%3E%3C/svg%3E">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soil Health Predictor - Predict. Grow. Profit.</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- Language Selection Modal -->
+<div class="modal fade" id="langModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="border-radius:20px;">
+      <div class="modal-body p-4 text-center">
+        <h4 class="mb-1">🌱 <span data-i18n="select_language">Select Your Language</span></h4>
+        <div class="row g-3 mt-3">
+          <div class="col-4"><div class="lang-option" data-lang="en"><div style="font-size:1.6rem;">🇬🇧</div>English</div></div>
+          <div class="col-4"><div class="lang-option" data-lang="te"><div style="font-size:1.6rem;">🇮🇳</div>తెలుగు</div></div>
+          <div class="col-4"><div class="lang-option" data-lang="hi"><div style="font-size:1.6rem;">🇮🇳</div>हिन्दी</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-glass">
+  <div class="container">
+    <a class="navbar-brand" href="/"><i class="fa-solid fa-seedling me-2"></i>Soil Health Predictor</a>
+    <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+        <li class="nav-item"><a class="nav-link" href="#hero" data-i18n="nav_home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#features" data-i18n="nav_features">Features</a></li>
+        <li class="nav-item"><a class="nav-link" href="#how" data-i18n="nav_how">How It Works</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about" data-i18n="nav_about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact" data-i18n="nav_contact">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" id="navLoginLink" href="/login.html" data-i18n="nav_login">Login</a></li>
+        <li class="nav-item"><a class="nav-link" id="navRegisterLink" href="/register.html" data-i18n="nav_register">Register</a></li>
+        <li class="nav-item hidden" id="navDashboardLink"><a class="nav-link" href="/dashboard.html" data-i18n="nav_dashboard">Dashboard</a></li>
+        <li class="nav-item hidden" id="navLogoutLink"><a class="nav-link" href="#" onclick="logoutFarmer()">Logout</a></li>
+        <li class="nav-item ms-lg-2">
+          <select class="form-select form-select-sm" style="border-radius:20px;" onchange="switchLanguage(this.value)">
+            <option value="en">EN</option><option value="te">TE</option><option value="hi">HI</option>
+          </select>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero-v2" id="hero">
+  <div class="hero-floating-card left">
+    <div class="icon-badge"><i class="fa-solid fa-flask"></i></div>
+    <div><div class="label">Nutrients Analyzed</div><div class="value">12 Parameters</div></div>
+  </div>
+  <div class="hero-floating-card right">
+    <div class="icon-badge"><i class="fa-solid fa-bolt"></i></div>
+    <div><div class="label">Report Speed</div><div class="value">Instant Results</div></div>
+  </div>
+
+  <div class="hero-inner">
+    <span class="hero-badge-pill"><i class="fa-solid fa-leaf me-2"></i>Smart Soil Analysis Platform</span>
+    <h1 class="hero-brand">Soil Health Predictor</h1>
+    <p class="hero-tagline" data-i18n="hero_title">Predict. Grow. Profit.</p>
+    <p class="hero-desc" data-i18n="hero_subtitle">AI-powered soil analysis that helps every farmer understand nutrient health and grow smarter.</p>
+    <div class="d-flex gap-3 justify-content-center flex-wrap">
+      <a href="/register.html" class="btn btn-farm-earth" data-i18n="hero_cta_start">Get Started Free</a>
+      <a href="/login.html" class="btn btn-farm-outline" data-i18n="hero_cta_login">Farmer Login</a>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    Scroll to explore
+    <i class="fa-solid fa-chevron-down"></i>
+  </div>
+</section>
+
+<!-- About -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <h2 class="section-title" data-i18n="about_title">About Soil Health Predictor</h2>
+        <p class="text-muted mt-3" data-i18n="about_text">Soil Health Predictor helps farmers analyze soil health, detect nutrient deficiencies, and get clear fertilizer recommendations using real agronomic data and AI assistance.</p>
+      </div>
+      <div class="col-lg-6">
+        <div class="card-farm p-3">
+          <svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+            <defs>
+              <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#eaf6ec"/>
+                <stop offset="100%" stop-color="#ffffff"/>
+              </linearGradient>
+              <linearGradient id="topsoil" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#6d4c41"/>
+                <stop offset="100%" stop-color="#5d4037"/>
+              </linearGradient>
+              <linearGradient id="subsoil" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#a1887f"/>
+                <stop offset="100%" stop-color="#8d6e63"/>
+              </linearGradient>
+              <linearGradient id="bedrock" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#78909c"/>
+                <stop offset="100%" stop-color="#607d8b"/>
+              </linearGradient>
+            </defs>
+
+            <rect x="0" y="0" width="480" height="140" fill="url(#skyGrad)"/>
+            <rect x="0" y="140" width="480" height="70" fill="url(#topsoil)"/>
+            <rect x="0" y="210" width="480" height="80" fill="url(#subsoil)"/>
+            <rect x="0" y="290" width="480" height="70" fill="url(#bedrock)"/>
+
+            <!-- texture specks -->
+            <g fill="rgba(255,255,255,0.10)">
+              <circle cx="60" cy="170" r="4"/><circle cx="150" cy="185" r="3"/><circle cx="260" cy="160" r="5"/>
+              <circle cx="360" cy="180" r="3"/><circle cx="420" cy="165" r="4"/>
+              <circle cx="90" cy="240" r="4"/><circle cx="210" cy="255" r="3"/><circle cx="330" cy="235" r="5"/>
+            </g>
+
+            <!-- plant + roots -->
+            <g>
+              <path d="M240 140 C 236 110, 244 90, 240 60" stroke="#2e7d32" stroke-width="6" fill="none" stroke-linecap="round"/>
+              <path d="M240 100 C 220 90, 210 75, 205 55" stroke="#43a047" stroke-width="5" fill="none" stroke-linecap="round"/>
+              <path d="M240 90 C 260 80, 268 65, 272 50" stroke="#43a047" stroke-width="5" fill="none" stroke-linecap="round"/>
+              <ellipse cx="204" cy="52" rx="16" ry="9" fill="#66bb6a" transform="rotate(-25 204 52)"/>
+              <ellipse cx="273" cy="47" rx="16" ry="9" fill="#66bb6a" transform="rotate(20 273 47)"/>
+              <ellipse cx="240" cy="55" rx="14" ry="9" fill="#81c784"/>
+              <!-- roots -->
+              <path d="M240 140 C 225 160, 220 180, 200 200" stroke="#3e2723" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.7"/>
+              <path d="M240 140 C 255 165, 258 185, 275 205" stroke="#3e2723" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.7"/>
+              <path d="M240 140 C 240 170, 240 190, 240 215" stroke="#3e2723" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.7"/>
+            </g>
+
+            <!-- soil test probe -->
+            <g transform="translate(340,120)">
+              <rect x="-4" y="0" width="8" height="90" rx="4" fill="#37474f"/>
+              <circle cx="0" cy="-14" r="22" fill="#ffffff" stroke="#2e7d32" stroke-width="5"/>
+              <circle cx="0" cy="-14" r="10" fill="#e8f5e9" stroke="#2e7d32" stroke-width="3"/>
+            </g>
+
+            <!-- labels -->
+            <text x="16" y="165" font-family="Poppins, sans-serif" font-size="13" fill="#ffffff" opacity="0.9">Topsoil</text>
+            <text x="16" y="245" font-family="Poppins, sans-serif" font-size="13" fill="#ffffff" opacity="0.9">Subsoil</text>
+            <text x="16" y="325" font-family="Poppins, sans-serif" font-size="13" fill="#ffffff" opacity="0.9">Bedrock</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="section bg-white" id="features">
+  <div class="container text-center">
+    <h2 class="section-title" data-i18n="features_title">Features</h2>
+    <p class="section-subtitle mt-2 mb-5" data-i18n="features_subtitle">Everything a modern farmer needs, in one place.</p>
+    <div class="row g-4">
+      <div class="col-md-4 reveal-on-scroll"><div class="card-farm p-4 h-100"><div class="icon-circle"><i class="fa-solid fa-flask"></i></div><h5 data-i18n="feature_soil">Soil Nutrient Analysis</h5><p class="text-muted small" data-i18n="feature_soil_desc">Get instant Low/Normal/High status for 12 key soil nutrients.</p></div></div>
+      <div class="col-md-4 reveal-on-scroll"><div class="card-farm p-4 h-100"><div class="icon-circle"><i class="fa-solid fa-file-image"></i></div><h5 data-i18n="feature_ocr">Soil Report OCR</h5><p class="text-muted small" data-i18n="feature_ocr_desc">Upload your lab soil report and we auto-fill the values for you.</p></div></div>
+      <div class="col-md-4 reveal-on-scroll"><div class="card-farm p-4 h-100"><div class="icon-circle"><i class="fa-solid fa-file-lines"></i></div><h5 data-i18n="feature_report">Detailed Nutrient Report</h5><p class="text-muted small" data-i18n="feature_report_desc">Full breakdown of all 12 nutrients with fertilizer type, quantity and priority.</p></div></div>
+      <div class="col-md-4 reveal-on-scroll"><div class="card-farm p-4 h-100"><div class="icon-circle"><i class="fa-solid fa-robot"></i></div><h5 data-i18n="feature_chat">AI Farming Assistant</h5><p class="text-muted small" data-i18n="feature_chat_desc">Ask AgriBot anything about fertilizers, soil health or irrigation, 24/7.</p></div></div>
+      <div class="col-md-4 reveal-on-scroll"><div class="card-farm p-4 h-100"><div class="icon-circle"><i class="fa-solid fa-cloud-sun-rain"></i></div><h5 data-i18n="feature_weather">Live Weather</h5><p class="text-muted small" data-i18n="feature_weather_desc">Real-time temperature, humidity and rainfall for your location.</p></div></div>
+      <div class="col-md-4 reveal-on-scroll"><div class="card-farm p-4 h-100"><div class="icon-circle"><i class="fa-solid fa-gauge-high"></i></div><h5 data-i18n="feature_score">Soil Health Score</h5><p class="text-muted small" data-i18n="feature_score_desc">A single 0-100 score showing your soil's overall health.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="section" id="how">
+  <div class="container text-center">
+    <h2 class="section-title" data-i18n="how_title">How It Works</h2>
+    <div class="row g-4 mt-3">
+      <div class="col-md-3 reveal-on-scroll"><div class="card-farm p-4 h-100"><div class="icon-circle mx-auto">1</div><h6 data-i18n="how_step1">Register & Login</h6><p class="small text-muted" data-i18n="how_step1_desc">Create your free farmer account in under a minute.</p></div></div>
+      <div class="col-md-3 reveal-on-scroll"><div class="card-farm p-4 h-100"><div class="icon-circle mx-auto">2</div><h6 data-i18n="how_step2">Enter or Upload Soil Data</h6><p class="small text-muted" data-i18n="how_step2_desc">Type nutrient values manually or upload your soil report.</p></div></div>
+      <div class="col-md-3 reveal-on-scroll"><div class="card-farm p-4 h-100"><div class="icon-circle mx-auto">3</div><h6 data-i18n="how_step3">Get Instant Analysis</h6><p class="small text-muted" data-i18n="how_step3_desc">See nutrient status, health score and solutions immediately.</p></div></div>
+      <div class="col-md-3 reveal-on-scroll"><div class="card-farm p-4 h-100"><div class="icon-circle mx-auto">4</div><h6 data-i18n="how_step4">Apply the Right Fertilizer</h6><p class="small text-muted" data-i18n="how_step4_desc">Follow the nutrient-wise fertilizer plan to improve your soil.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Benefits -->
+<section class="section bg-white" id="benefits">
+  <div class="container">
+    <h2 class="section-title text-center mb-5" data-i18n="benefits_title">Benefits</h2>
+    <div class="row g-4">
+      <div class="col-md-3 text-center reveal-on-scroll"><i class="fa-solid fa-coins fa-2x mb-2" style="color:var(--green);"></i><p data-i18n="benefit1">Save money on unnecessary fertilizers</p></div>
+      <div class="col-md-3 text-center reveal-on-scroll"><i class="fa-solid fa-chart-line fa-2x mb-2" style="color:var(--green);"></i><p data-i18n="benefit2">Increase yield with balanced soil nutrition</p></div>
+      <div class="col-md-3 text-center reveal-on-scroll"><i class="fa-solid fa-language fa-2x mb-2" style="color:var(--green);"></i><p data-i18n="benefit3">Understand your soil in simple language</p></div>
+      <div class="col-md-3 text-center reveal-on-scroll"><i class="fa-solid fa-chart-simple fa-2x mb-2" style="color:var(--green);"></i><p data-i18n="benefit4">Make data-driven farming decisions</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="container">
+    <h2 class="section-title text-center mb-5" data-i18n="faq_title">Frequently Asked Questions</h2>
+    <div class="accordion mx-auto" style="max-width:800px;" id="faqAccordion">
+      <div class="accordion-item mb-3" style="border-radius:12px;overflow:hidden;">
+        <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#faq1">Is Soil Health Predictor free to use?</button></h2>
+        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion"><div class="accordion-body">Yes, registration and soil analysis are completely free for farmers.</div></div>
+      </div>
+      <div class="accordion-item mb-3" style="border-radius:12px;overflow:hidden;">
+        <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq2">Do I need a lab report to use this?</button></h2>
+        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">No. You can either upload a soil test report (PDF/image) for automatic reading, or enter nutrient values manually if you already have them.</div></div>
+      </div>
+      <div class="accordion-item mb-3" style="border-radius:12px;overflow:hidden;">
+        <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq3">How is the Soil Health Score calculated?</button></h2>
+        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">It's the percentage of your 12 tested nutrients that fall within the normal range, based on standard Soil Health Card guidelines. Always confirm results with your local agriculture office for critical decisions.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="section bg-white" id="contact">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-7">
+        <h2 class="section-title text-center mb-4" data-i18n="contact_title">Contact Us</h2>
+        <form id="contactForm" class="card-farm p-4">
+          <div class="mb-3"><input type="text" id="contactName" class="form-control" data-i18n-placeholder="contact_name" placeholder="Your Name" required></div>
+          <div class="mb-3"><input type="email" id="contactEmail" class="form-control" data-i18n-placeholder="contact_email" placeholder="Your Email" required></div>
+          <div class="mb-3"><textarea id="contactMessage" class="form-control" rows="4" data-i18n-placeholder="contact_message" placeholder="Message" required></textarea></div>
+          <button type="submit" class="btn btn-farm w-100" data-i18n="contact_send">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer-farm">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <h5><i class="fa-solid fa-seedling me-2"></i>Soil Health Predictor</h5>
+        <p class="small mt-2">Predict. Grow. Profit.</p>
+      </div>
+      <div class="col-md-4">
+        <h5>Links</h5>
+        <p><a href="#about" data-i18n="nav_about">About</a></p>
+        <p><a href="#features" data-i18n="nav_features">Features</a></p>
+        <p><a href="/admin-login.html" data-i18n="nav_admin">Admin</a></p>
+      </div>
+      <div class="col-md-4">
+        <h5 data-i18n="nav_contact">Contact</h5>
+        <p><i class="fa-solid fa-envelope me-2"></i>support@soil-health-predictor.example</p>
+      </div>
+    </div>
+    <hr style="border-color:rgba(255,255,255,0.1);">
+    <p class="text-center small mb-0">&copy; <span id="year"></span> Soil Health Predictor. <span data-i18n="footer_rights">All rights reserved.</span></p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/lang.js"></script>
+<script src="/js/main.js"></script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

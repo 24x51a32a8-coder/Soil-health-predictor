@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>if(localStorage.getItem("shp_theme")==="dark")document.documentElement.setAttribute("data-theme","dark");</script>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%8C%B1%3C/text%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Prediction - Soil Health Predictor</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="page-bg-soil">
+
+<nav class="navbar navbar-expand-lg navbar-farm">
+  <div class="container">
+    <a class="navbar-brand" href="/"><i class="fa-solid fa-seedling me-2"></i>Soil Health Predictor</a>
+    <div class="ms-auto d-flex align-items-center gap-3">
+      <a href="/dashboard.html" class="text-white text-decoration-none"><i class="fa-solid fa-house me-1"></i>Dashboard</a>
+      <a href="#" class="btn btn-farm-outline btn-sm" onclick="logoutFarmer()">Logout</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container py-4">
+  <h3 class="mb-1 fade-in-up" style="font-family:'Playfair Display',serif; color:var(--dark-green);"><i class="fa-solid fa-flask me-2"></i><span data-i18n="new_prediction">New Prediction</span></h3>
+  <p class="text-muted mb-4 fade-in-up">Enter your soil test values or upload a report — we'll analyze it instantly.</p>
+
+  <form id="predictionForm">
+    <!-- Entry method tabs -->
+    <ul class="nav nav-pills mb-4" id="entryTabs">
+      <li class="nav-item"><button class="nav-link active" id="manual-tab" data-bs-toggle="tab" data-bs-target="#manualPane" type="button"><i class="fa-solid fa-keyboard me-1"></i><span data-i18n="manual_entry">Manual Entry</span></button></li>
+      <li class="nav-item"><button class="nav-link" id="upload-tab" data-bs-toggle="tab" data-bs-target="#uploadPane" type="button"><i class="fa-solid fa-file-arrow-up me-1"></i><span data-i18n="upload_report">Upload Soil Report</span></button></li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="uploadPane">
+        <div class="card-farm p-4 mb-4">
+          <label class="form-label fw-semibold">Upload PDF, PNG or JPG</label>
+          <input type="file" id="reportFile" class="form-control" accept=".pdf,.png,.jpg,.jpeg">
+          <div class="progress mt-3 hidden" style="height:20px;border-radius:10px;">
+            <div id="ocrProgressBar" class="progress-bar bg-success" style="width:0%;">0%</div>
+          </div>
+          <p id="ocrStatus" class="small text-muted mt-2 hidden"></p>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="manualPane"></div>
+    </div>
+
+    <!-- Nutrient inputs (shared between manual + OCR autofill) -->
+    <div class="card-farm p-4 mb-4">
+      <h5 class="mb-3">Soil Nutrient Values</h5>
+      <div id="nutrientRows"></div>
+    </div>
+
+    <!-- Location -->
+    <div class="card-farm p-4 mb-4">
+      <h5 class="mb-3"><i class="fa-solid fa-location-dot me-2"></i>Location</h5>
+      <p id="locationStatus" class="small text-muted">Detecting your location...</p>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label" data-i18n="village">Village</label>
+          <input type="text" id="villageInput" class="form-control" required>
+        </div>
+        <div class="col-md-4"><label class="form-label">Latitude</label><input type="text" id="latInput" class="form-control" readonly></div>
+        <div class="col-md-4"><label class="form-label">Longitude</label><input type="text" id="lonInput" class="form-control" readonly></div>
+      </div>
+    </div>
+
+    <!-- Weather -->
+    <div class="card-farm p-4 mb-4">
+      <h5 class="mb-3"><i class="fa-solid fa-cloud-sun-rain me-2"></i>Weather</h5>
+      <p id="weatherStatus" class="small text-muted">Waiting for location...</p>
+      <div class="row g-3">
+        <div class="col-md-4"><label class="form-label">Temperature (°C)</label><input type="number" step="0.1" id="tempInput" class="form-control"></div>
+        <div class="col-md-4"><label class="form-label">Humidity (%)</label><input type="number" step="0.1" id="humidityInput" class="form-control"></div>
+        <div class="col-md-4"><label class="form-label">Rainfall (mm)</label><input type="number" step="0.1" id="rainfallInput" class="form-control"></div>
+      </div>
+    </div>
+
+    <!-- Additional info (optional) -->
+    <div class="card-farm p-4 mb-4">
+      <h5 class="mb-3">Farm Details <span class="text-muted small">(optional)</span></h5>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label" data-i18n="land_area">Land Area (acres)</label>
+          <input type="number" step="0.1" id="landAreaInput" class="form-control">
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" id="predictBtn" class="btn btn-farm w-100 py-3" disabled data-i18n="predict_btn">Predict Now</button>
+  </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="/js/lang.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/prediction.js"></script>
+<script src="/js/ocr.js"></script>
+</body>
+</html>
